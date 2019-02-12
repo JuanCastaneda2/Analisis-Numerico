@@ -1,0 +1,26 @@
+def ejercicio ():
+    print("Ingrese el grado del polinomio")
+    grado = int(input())
+    print("Ingrese el numero a evaluar")
+    num = int(input())
+    polinomio = [0]
+    total,operaciones,multiplicaciones = 0
+    for i in range (grado):
+        print ("Ingrese el numero de x^" , i+1 ," ", end = '')
+        x = int(input())
+        polinomio.append(x)
+        
+    print ("El polinomio es: ", end = '')    
+    for i in range (len(polinomio)):
+        print (polinomio[i], "x^", i, " + ", end = '')
+        total = total + ((polinomio[i]*num)**i+1)
+        operaciones = operaciones + 3
+        multiplicaciones = multiplicaciones+1
+        
+    print ("Se usaron ", operaciones, " operaciones y ", multiplicaciones, " multiplicaciones")
+    print ("La funcion = ", total)
+        
+    
+    
+    
+ejercicio()
