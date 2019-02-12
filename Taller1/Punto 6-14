@@ -1,0 +1,30 @@
+punto6b = function(g,a,b, E=1e-9, maxIt=50){
+  k = 1
+  x = a
+  anterior = 0
+  d =  ((b-a)/10)
+  repeat{
+    x1 = g(x)
+    simbolo = x1 * anterior
+    anterior = x1
+    if (simbolo > 0 && k > 1 ){
+      x = x+d
+    }
+    if (simbolo < 0 && k > 1){
+      x = x-d
+      d = d/10
+    }
+    if ((d < E && k > 1) || k > maxIt || (x1==0 && k>1)){
+      cat("Iteracion", k, "  x= ", x1, "\n")
+      break;
+    }
+    
+    cat("Iteracion", k, "  x= ", x1, "\n")
+    k = k+1
+  }
+  if( k == maxIt+1 ){
+    cat("No hubo convergencia ")
+  } else{
+    cat("x es aproximadamente ", x, " con error menor a ", E)
+  }
+}
