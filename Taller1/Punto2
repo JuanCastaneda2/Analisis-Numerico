@@ -1,0 +1,8 @@
+s = function(max = 100){
+  while(max > 0){
+    f = max %% 2
+    max = max %/% 2
+    cat(f, maxiter)
+  }
+}
+s(73)
