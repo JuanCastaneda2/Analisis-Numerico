@@ -1,0 +1,15 @@
+import math
+
+def raiznn (num,raiz):
+    xk = 1
+    xk1 = 1
+    a= 1
+    while a!=0:
+        xk = xk1
+        xk1 = (1/2) * (xk+(num/(xk ** (raiz-1)))
+        if (math.fabs(xk-xk1)) < 0.0000001:
+        a = 1
+    
+    return xk1
+        
+print(raiznn(27, 3))
