@@ -1,3 +1,4 @@
+from setuptools.command.bdist_egg import scan_module
 def ejercicio ():
     print("Ingrese el grado del polinomio")
     grado = int(input())
@@ -6,21 +7,20 @@ def ejercicio ():
     polinomio = [0]
     total,operaciones,multiplicaciones = 0
     for i in range (grado):
-        print ("Ingrese el numero de x^" , i+1 ," ", end = '')
+        print ("Ingrese el numero de x^" , i ," ", end = '')
         x = int(input())
         polinomio.append(x)
         
     print ("El polinomio es: ", end = '')    
     for i in range (len(polinomio)):
         print (polinomio[i], "x^", i, " + ", end = '')
-        total = total + ((polinomio[i]*num)**i+1)
-        operaciones = operaciones + 3
-        multiplicaciones = multiplicaciones+1
+        total = total + ((polinomio[i]*num)**i)
+        if (i>0 and operaciones[1] != 0):
+            multiplicaciones = multiplicaciones+1
+            operaciones = operaciones +3
         
     print ("Se usaron ", operaciones, " operaciones y ", multiplicaciones, " multiplicaciones")
     print ("La funcion = ", total)
         
-    
-    
     
 ejercicio()
