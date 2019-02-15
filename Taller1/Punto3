@@ -1,0 +1,79 @@
+f<-function(x){
+  return(sqrt((2-(2*cospi(x)))*2+(1-sinpi(x))*2))
+}
+df<-function(x)
+{
+  return(((4*sinpi(x) )- (((3*sinpi(x)) +1)*cospi(x)))/(sqrt((sinpi(x) * sinpi(x))-(2*sinpi(x))+(4*(cospi(x) * cospi(x)))-(8*cospi(x))+5)))
+}
+dat<- data.frame(t=seq(0, 2*pi, by=0.1) )
+xhrt <- function(t) 2*cos(t)
+yhrt <- function(t) sin(t)
+dat$y=yhrt(dat$t)
+dat$x=xhrt(dat$t)
+with(dat, plot(x,y, type="l",col="Green"))
+newton<-function(f,df,E,xo)
+{
+  k=0
+  repeat{
+    c=f(xo)/df(xo)
+    x1=xo-c
+    dx=abs(c)
+    xo=x1
+    k=k+1
+    if(dx<E ||k>100)
+      break;
+  }
+  y1<-sin(x1)
+  cat("# de iteraciones: ",k," El valor de xmax: ",format(x1,nsmall = 4),"rad, f(x): ",f(x1), ",Error Estimado: ", c)
+  cat("\nEl punto es: (",format(2*cos(x1),nsmall = 4),",",format(y1,nsmall = 4),", 0.0000)\n")
+  points(x=2,y=1,pch=19)
+  points(x=2*cos(x1),y=y1,pch=19,col="Red")
+}
+newton(f,df,0.0001,1)
+```
+```{r}
+metodo2 = function(a,b,error) {
+  k = 0
+  numi = a
+  superior = b
+  auxili = 0
+  aux = 0
+  resultado = Fx(b)
+  
+  l <- 1
+  Sys.sleep(8)
+  while(error < abs(resultado)){
+    k = k + 1
+    
+    if((Fx(numi)*Fx(superior))<0){
+      aux = (superior+numi)/2
+      auxili = Fx(aux)
+      
+      if(abs(auxili) < error){
+        break
+      }else{
+        if((Fx(numi)*auxili)>0){
+          numi =  aux
+        }else{
+          superior = aux
+        }
+      }
+      l[[k]] <- aux
+    }else{
+      cat("Intervalo no es correcto\n")
+      break
+    }
+  }
+  
+  #Grafica de la Solución
+  x = seq(-4,2,0.1)
+  
+  plot(x,Original(x),type="l",xlim=c(-1.5,0.5),ylim=c(-1,3.5), col="orange",xlab="t",ylab="r(t)")
+  par(new=TRUE)
+  plot(x,Original2(x),type="l", xlim=c(-1.5,0.5),ylim=c(-1,3.5), col="green",xlab="t",ylab="r(t)")
+  title(main="Solucion de las rectas")
+  
+  cat("iteraciones =",k,"x =",aux,"F(x) = ",Original(aux),"\n")
+}
+
+metodo2(-1,1,10e-6)
