@@ -52,11 +52,7 @@ gaussPP = function(A){
       cont = cont+1
       k = 0
     }
-    if (is.null(dim(pos))){
-      cat ("Removi la fila 1 \n")
-      cont = cont+1;
-      break;
-    }else if (dim(pos)[1] == 0){
+    if (dim(pos)[1] == 0){
       break;
   }
     k=k+1;
@@ -65,11 +61,7 @@ gaussPP = function(A){
   inte<-0;  
   repeat{
       pos <- which(S == 0 , arr.ind=TRUE)
-      if (is.null(dim(pos))){
-        cont = cont+1;
-        cat ("Removi la fila 1 \n")
-        break;
-      }else if (dim(pos)[1] == 0){
+      if (dim(pos)[1] == 0){
         break;
        } else{
           l [[contl]] <- S[pos[1],]
@@ -90,24 +82,23 @@ gaussPP = function(A){
      vec = vec[!vec %in% -1]
      minn = which.min(vec);
      S = S - vec[minn];
-     cat ("Aqui gonorreo  " , vec[minn] , " ", vec , "\n")
      print (S)
      for (z in 1:(length(l))){
-       if (l[[z]][1] == 0)
-         v1 = A[,l[[z]][2]]
-       else
-         v1 = A[l[[z]][1],]
+      
        for (s in 2:(length(l))){
-         if (l[[s]][1] == 0)
-           v2 = A[,l[[s]][2]]
-         else
-           v2 = A[l[[s]][1],]
+         if (l[[z]][1] == 0 && l[[s]][2] == 0 ){
+           x <- c(l[[z]][2],l[[s]][1])
+           inte <- c(x)
+         }else if (l[[z]][2] == 0 && l[[s]][1] == 0){
+           x <- c(l[[z]][1],l[[s]][2])
+           inte <- c(x)
+         }
          
        }
-       inte <-  c(intersect(v1,v2))
+       #inte <-  c(intersect(v1,v2))
      }
-     inte<- inte[!inte %in% 0]
-     
+     #inte<- inte[!inte %in% 0]
+     cat ("Hola ",inte)
      
      for (z in 1:length(l)){
        if (l[[z]][1] == 0){
